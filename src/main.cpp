@@ -9,7 +9,7 @@ bool (*event_handler)(void);//coso figo
 void (*screen_drawer)(void);
 
 int main(){
-    InitWindow(ScreenWidth, ScreenHeight, "raytracing");
+    InitWindow(ScreenWidth, ScreenHeight, "raycasting experiment");
     SetTargetFPS(60);
     SetExitKey(KEY_ESCAPE);
     

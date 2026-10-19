@@ -11,7 +11,7 @@ float cast_ray(float angle){
         float cx = player_pos.x + dx * d; //cella nella mappa in cui si trova il raggio
         float cy = player_pos.y + dy * d;
 
-        if(MP[cx][cy] == '#'){ //se il raggio colpisce un muro
+        if(MP[(int)cy][(int)cx] == '#'){ //se il raggio colpisce un muro
             return d;
         }
     }

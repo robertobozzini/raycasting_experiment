@@ -1,3 +1,5 @@
 # = muro
 . = spazio vuoto
 P = posizione iniziale
+
+comando è g++ *.cpp -o exe $LINKRAYLIB && ./exe
