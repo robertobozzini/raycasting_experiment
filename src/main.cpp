@@ -2,8 +2,8 @@
 
 using namespace std;
 
-constexpr int ScreenWidth = 1500;
-constexpr int ScreenHeight = 1000;
+const int ScreenWidth = 1500;
+const int ScreenHeight = 1000;
 
 bool (*event_handler)(void);//coso figo
 void (*screen_drawer)(void);
@@ -15,6 +15,8 @@ int main(){
     
     event_handler = game_update;//ora lasciamo cosi, in caso dopo voglio fare la lobby cambio
     screen_drawer = game_draw;
+
+    game_init();
     while(!WindowShouldClose()){
 
         if(event_handler != nullptr){

@@ -1,5 +1,4 @@
 #include "map.h"
-#include "game_main.h"
 
 using namespace std;
 vector<vector<char>>MP;
@@ -8,6 +7,7 @@ filesystem::path map_path = "../maps/map0.txt";
 
 int map_height;
 int map_width;
+
 
 void map_init(void){
     ifstream map_file;
@@ -22,7 +22,7 @@ void map_init(void){
     map_height = 0;
     map_width = 0;
 
-    for(getline(map_file, s); !map_file.eof(); getline(map_file, s)){
+    while(getline(map_file,s)){
         map_height++;
         if(map_height == 1){
             map_width = s.size();
@@ -34,7 +34,7 @@ void map_init(void){
         for(int j=0;j<map_width;j++){
             MP[map_height - 1][j] = s[j];
             if(s[j] == 'P'){
-                player_pos = {j, map_height - 1};//x, y
+                player_pos = {j + 0.5f, map_height - 1 + 0.5f};//x, y, +0.5 to center the player in the cell
             }
         }
     }

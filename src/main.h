@@ -12,5 +12,13 @@
 #include<string>
 
 #include "game_main.h"
+#include "raycasting.h"
+#include "map.h"
+
+extern const int ScreenWidth;
+extern const int ScreenHeight;
+extern bool (*event_handler)(void);
+extern void (*screen_drawer)(void);
+
 
 #endif

@@ -7,6 +7,8 @@
 #include<iostream>
 #include<filesystem>
 
+using namespace std;
+
 extern vector<vector<char>>MP;
 extern filesystem::path map_path;
 extern int map_height;
