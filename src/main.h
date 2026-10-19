@@ -5,7 +5,12 @@
 #include<raylib.h>
 #include<vector>
 #include<raymath.h>
-#include<iostream>
 #include<algorithm>
+#include<map>
+#include<thread>
+#include<cmath>
+#include<string>
+
+#include "game_main.h"
 
 #endif
