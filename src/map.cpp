@@ -17,7 +17,8 @@ void map_init(void){
         cout<<"Map file not found"<<endl;
         return;
     }
-
+    vector<string> map_lines;
+    //devo invertire x e y, perche' la mappa è scritta in righe e colonne, ma il player_pos è in coordinate cartesiane
     string s;
     map_height = 0;
     map_width = 0;
@@ -27,15 +28,22 @@ void map_init(void){
         if(map_height == 1){
             map_width = s.size();
         }
+        map_lines.push_back(s);
         //string s;
         //getline(map_file,s);
-        MP.push_back(vector<char>());
-        MP[map_height - 1].resize(map_width);
+        //MP.push_back(vector<char>());
+        //MP[map_height - 1].resize(map_width);
         for(int j=0;j<map_width;j++){
-            MP[map_height - 1][j] = s[j];
+            //MP[map_height - 1][j] = s[j];
             if(s[j] == 'P'){
                 player_pos = {j + 0.5f, map_height - 1 + 0.5f};//x, y, +0.5 to center the player in the cell
             }
+        }
+    }
+    MP.assign(map_width, vector<char>(map_height));
+    for(int i=0;i<map_height;i++){
+        for(int j=0;j<map_width;j++){
+            MP[j][i] = map_lines[i][j];
         }
     }
 

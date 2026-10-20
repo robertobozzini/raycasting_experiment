@@ -22,9 +22,9 @@ bool game_update(void){
 
     float step = (IsKeyDown(KEY_W) - IsKeyDown(KEY_S)) * move_speed * dt;
 
-    float new_x = player_pos.x + cosf(player_angle) * step;
-    float new_y = player_pos.y + sinf(player_angle) * step;
-    if(MP[(int)new_y][(int)new_x] != '#'){ //se non c'è un muro
+    float new_x = player_pos.x + cosf(player_angle) * step;//DEVO SISTEMARE 
+    float new_y = player_pos.y + sinf(player_angle) * step;//VA IN DIAGONALE
+    if(MP[(int)new_x][(int)new_y] != '#'){ //se non c'è un muro
         player_pos.x = new_x;
         player_pos.y = new_y;
     }
@@ -35,8 +35,8 @@ bool game_update(void){
 void game_draw(void){
     ClearBackground(BLACK);
     for(int x = 0; x < ScreenWidth; x++){
-        float ray_angle = player_angle - FOV/2.0f + FOV * ((float)x / (float)ScreenWidth);
-        float distance = cast_ray(ray_angle) * cosf(ray_angle - player_angle); //correzione della distorsione prospettica
+        float ray_angle = player_angle - FOV/2.0f * ((float)x / (float)ScreenWidth);
+        float distance = cast_ray(ray_angle)* cosf(ray_angle - player_angle); //correzione della distorsione prospettica
 
         //disegno il muro
         float wall_height = ((float)ScreenHeight / distance);
