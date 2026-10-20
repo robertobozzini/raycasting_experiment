@@ -6,6 +6,8 @@
 
 using namespace std;
 
+extern Color floor_color;
+extern Color ceil_color;
 
 void game_init(void);
 bool game_update(void);

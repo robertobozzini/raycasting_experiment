@@ -15,5 +15,7 @@ extern int map_height;
 extern int map_width;
 
 void map_init(void);
+void minimap_init(void);
+void minimap_draw(void);
 
 #endif

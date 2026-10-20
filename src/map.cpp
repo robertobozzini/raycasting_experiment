@@ -46,3 +46,57 @@ void map_init(void){
     }
 
 }
+
+float minimap_fract = 5.0f; //quale dello schermo è la minimappa
+
+float minimap_cellsize = 0; //dimensione di una cella della mappa in pixel
+float minimap_width = 0; //dimensione della mappa in pixel
+float minimap_height = 0; //dimensione della mappa in pixel
+
+Rectangle minimap_rect; //rettangolo della minimappa
+Color minimap_color = floor_color; //colore della minimappa //colore dei muri della minimappa
+Color player_color = {0, 255, 0, 255}; //colore del giocatore sulla minimappa
+Color border_color = {0, 0, 0, 255}; //colore del bordo della minimappa
+//wall_color è il colore dei muri
+float padding = 10.0f; //padding tra la minimappa e il bordo dello schermo
+
+float border = 10.0f; //spessore del bordo della minimappa
+
+void minimap_init(void){
+
+    float minimap_mxsize = (float)ScreenHeight / minimap_fract;
+
+
+    if(map_width > map_height){
+        minimap_cellsize = (float)minimap_mxsize / map_width;
+    }
+    else{
+        minimap_cellsize = (float)minimap_mxsize / map_height;
+    }
+    minimap_width = map_width * minimap_cellsize;
+    minimap_height = map_height * minimap_cellsize;
+
+    minimap_rect = {(float)ScreenWidth - minimap_width - border - padding, border + padding, minimap_width, minimap_height};
+
+}
+
+float fill_gaps = 0.1f;
+
+void minimap_draw(void){
+    DrawRectangle(minimap_rect.x - border, minimap_rect.y - border,
+         minimap_rect.width + 2*border, minimap_rect.height + 2*border, border_color);
+    DrawRectangleRec(minimap_rect, minimap_color);
+
+    for(int y=0;y<map_height;y++){
+        for(int x=0;x<map_width;x++){
+            if(MP[x][y] == '#'){
+                DrawRectangle(minimap_rect.x + x * minimap_cellsize, minimap_rect.y + y * minimap_cellsize,
+                 minimap_cellsize + fill_gaps, minimap_cellsize + fill_gaps, wall_color);
+            }
+        }
+    }
+    //draw player
+    DrawCircle(minimap_rect.x + player_pos.x * minimap_cellsize, 
+        minimap_rect.y + player_pos.y * minimap_cellsize, 
+        minimap_cellsize/3.0f, player_color);
+}

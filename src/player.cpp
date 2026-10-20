@@ -24,6 +24,7 @@ static bool collides(float x, float y){
     return collision;
 }
 
+bool firstframe = true;
 void player_update(void){
     float dt = GetFrameTime();
 
@@ -31,7 +32,8 @@ void player_update(void){
         IsCursorHidden() ? EnableCursor() : DisableCursor();
     }
 
-    Vector2 deltamousepos = IsCursorHidden() ? GetMouseDelta() : (Vector2){0, 0};
+    Vector2 deltamousepos = IsCursorHidden() && !firstframe ? GetMouseDelta() : (Vector2){0, 0};
+    firstframe = false;
 
     player_angle -= deltamousepos.x * turn_speed;
     float stepy = (IsKeyDown(KEY_W) - IsKeyDown(KEY_S)) * move_speed * dt;//dritto
@@ -39,11 +41,10 @@ void player_update(void){
 
     float dx = cosf(player_angle) * stepy + sinf(player_angle) * stepx; //cos(a + pi/2) = sin(a)
     float dy = sinf(player_angle) * stepy - cosf(player_angle) * stepx; //sin(a + pi/2) = -cos(a)
-    /*
-    cout<<"player_pos.x: "<<player_pos.x<<" player_pos.y: "<<player_pos.y<<endl;
-    cout<<"new_x: "<<new_x<<" new_y: "<<new_y<<endl;
-    cout<<"player_angle: "<<player_angle<<endl;
-    */
+    //cout<<"deltamousepos.x: "<<deltamousepos.x<<" deltamousepos.y: "<<deltamousepos.y<<endl;
+    //cout<<"player_pos.x: "<<player_pos.x<<" player_pos.y: "<<player_pos.y<<endl;
+    //cout<<"player_angle: "<<player_angle<<endl;
+    
     float new_x = player_pos.x + dx;
     float new_y = player_pos.y + dy;
 

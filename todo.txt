@@ -1,4 +1,3 @@
-muoversi vicino a muri : fix di sembra che passo attraverso
 
 minimappa:
     - o a char o a colori

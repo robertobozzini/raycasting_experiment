@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 const int ScreenWidth = 1500;
 const int ScreenHeight = 1000;
 
@@ -9,6 +10,7 @@ bool (*event_handler)(void);//coso figo
 void (*screen_drawer)(void);
 
 int main(){
+    //ScreenWidth = screenWHratio * ScreenHeight;
     InitWindow(ScreenWidth, ScreenHeight, "raycasting experiment");
     SetTargetFPS(60);
     SetExitKey(KEY_ESCAPE);

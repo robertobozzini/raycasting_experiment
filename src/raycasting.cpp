@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Color wall_color = {225, 225, 225, 255}; 
+
 float cast_ray(float angle){
 
     float dx = cosf(angle);//direzione del raggio
@@ -29,6 +31,6 @@ void draw_ray(float wallsize){
 
         //disegno il muro
         float wall_height = ((float)ScreenHeight / distance) * wallsize;
-        DrawLine(x, (ScreenHeight - wall_height) / 2.0f, x, (ScreenHeight + wall_height) / 2.0f, WHITE);
+        DrawLine(x, (ScreenHeight - wall_height) / 2.0f, x, (ScreenHeight + wall_height) / 2.0f, wall_color);
     }
 }
