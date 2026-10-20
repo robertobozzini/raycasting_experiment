@@ -7,10 +7,21 @@ float player_angle; // vedila come una circonferenza 0 è a destra, pi/2 in bass
 const float FOV = PI/3.0f; //campo visivo del giocatore
 const float turn_speed = 3.5e-3; //velocità di rotazione del giocatore
 const float move_speed = 3.5f; //velocità di movimento del giocatore
-
+const float player_radius = 0.2f; //raggio del giocatore, per la collisione con i muri
 
 void player_init(void){
     player_angle = 0.0f;
+}
+
+static bool collides(float x, float y){
+    bool collision = false;
+    if(MP[(int)(x - player_radius)][(int)(y - player_radius)] == '#' ||
+       MP[(int)(x + player_radius)][(int)(y - player_radius)] == '#' ||
+       MP[(int)(x - player_radius)][(int)(y + player_radius)] == '#' ||
+       MP[(int)(x + player_radius)][(int)(y + player_radius)] == '#'){
+        collision = true;
+    }
+    return collision;
 }
 
 void player_update(void){
@@ -36,14 +47,14 @@ void player_update(void){
     float new_x = player_pos.x + dx;
     float new_y = player_pos.y + dy;
 
-    if(MP[(int)new_x][(int)new_y] != '#'){ //se non c'è un muro
+    if(!collides(new_x, new_y)){ //se non c'è un muro
         player_pos.x = new_x;
         player_pos.y = new_y;
     }
-    else if(MP[(int)new_x][(int)player_pos.y] != '#'){ //se non c'è un muro
+    else if(!collides(new_x, player_pos.y)){ //se non c'è un muro
         player_pos.x = new_x;
     }
-    else if(MP[(int)player_pos.x][(int)new_y] != '#'){ //se non c'è un muro
+    else if(!collides(player_pos.x, new_y)){ //se non c'è un muro
         player_pos.y = new_y;
     }
 }

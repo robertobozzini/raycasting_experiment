@@ -1,0 +1,19 @@
+muoversi vicino a muri : fix di sembra che passo attraverso
+
+minimappa:
+    - o a char o a colori
+    - me stesso (pallina idealmente)
+    - raggio di fov per far vedere visuale ->capire come
+
+versione no texture:
+    ombre su muri
+    pavimento (sfocatura per vedere meglio mia posizione)
+
+texture:
+    muri (+ lati)
+    pavimento in texture con prospettiva
+    tetto //
+
+not sure:
+    muri meno spessi
+    costruttore di mappa
