@@ -14,6 +14,7 @@
 #include "game_main.h"
 #include "raycasting.h"
 #include "map.h"
+#include "player.h"
 
 extern const int ScreenWidth;
 extern const int ScreenHeight;

@@ -6,9 +6,6 @@
 
 using namespace std;
 
-extern Vector2 player_pos;
-extern float player_angle;
-extern const float FOV;
 
 void game_init(void);
 bool game_update(void);

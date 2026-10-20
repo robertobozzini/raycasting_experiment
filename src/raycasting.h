@@ -7,5 +7,5 @@
 #include "game_main.h"
 
 float cast_ray(float angle);
-
+void draw_ray(float wallsize);
 #endif

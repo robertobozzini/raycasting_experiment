@@ -33,17 +33,15 @@ void map_init(void){
         //getline(map_file,s);
         //MP.push_back(vector<char>());
         //MP[map_height - 1].resize(map_width);
-        for(int j=0;j<map_width;j++){
-            //MP[map_height - 1][j] = s[j];
-            if(s[j] == 'P'){
-                player_pos = {j + 0.5f, map_height - 1 + 0.5f};//x, y, +0.5 to center the player in the cell
-            }
-        }
     }
     MP.assign(map_width, vector<char>(map_height));
     for(int i=0;i<map_height;i++){
         for(int j=0;j<map_width;j++){
             MP[j][i] = map_lines[i][j];
+            if(map_lines[i][j] == 'P'){
+                player_pos = {j + 0.5f, map_height - 1 - i + 0.5f};//x, y, +0.5 to center the player in the cell
+                MP[j][i] = '.';//replace P with empty space
+            }
         }
     }
 

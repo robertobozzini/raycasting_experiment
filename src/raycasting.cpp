@@ -19,3 +19,16 @@ float cast_ray(float angle){
     }
     return maxd;//return 50.0f; massimo che puoi vedere (?)
 }
+
+void draw_ray(float wallsize){
+    for(int x = 0; x < ScreenWidth; x++){
+        float ray_angle = player_angle + FOV/2.0f - FOV * ((float)x / (float)ScreenWidth);
+        float distance = cast_ray(ray_angle)* cosf(ray_angle - player_angle); //correzione della distorsione prospettica
+        //per evitare l'effetto fish-eye, moltiplico la distanza per il coseno dell'angolo tra il raggio e la direzione del giocatore
+        //quindi una specie di proiezione prospettica, perche' se il raggio è molto inclinato rispetto alla direzione del giocatore, la distanza apparente sarà maggiore di quella reale
+
+        //disegno il muro
+        float wall_height = ((float)ScreenHeight / distance) * wallsize;
+        DrawLine(x, (ScreenHeight - wall_height) / 2.0f, x, (ScreenHeight + wall_height) / 2.0f, WHITE);
+    }
+}
