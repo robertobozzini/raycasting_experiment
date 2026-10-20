@@ -8,9 +8,10 @@ mappa non si salva come [riga][colonna] (che sarebbe y x) ma il contrario
 
 comando è g++ *.cpp -o exe $LINKRAYLIB && ./exe
 
+mouse = telecamera
 
+SPACE = toggle di movimento mouse
 
+WASD ti muovi
 
-v 0.1:
-    idea fondamentale:
 

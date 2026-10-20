@@ -5,26 +5,27 @@ using namespace std;
 Vector2 player_pos;
 float player_angle = 0.0f; // vedila come una circonferenza 0 è a destra, pi/2 in basso, pi a sinistra, 3pi/2 in alto
 const float FOV = PI/3.0f; //campo visivo del giocatore
-float turn_speed = 0.2f; //velocità di rotazione del giocatore
+float turn_speed = 3.5e-3; //velocità di rotazione del giocatore
 float move_speed = 3.5f; //velocità di movimento del giocatore
 float wallsize = 1.5f; //dimensione del muro in unità di gioco
 
-Vector2 LastMousePos = {0,0};
+
 
 void game_init(void){
     map_init();
-    LastMousePos = GetMousePosition();
+    DisableCursor();
 }
 
 bool game_update(void){
     float dt = GetFrameTime();
 
-    Vector2 deltamousepos = GetMousePosition();
-    deltamousepos.x -= LastMousePos.x;
-    deltamousepos.y -= LastMousePos.y;
-    LastMousePos = GetMousePosition();
+    if(IsKeyPressed(KEY_SPACE)){
+        IsCursorHidden() ? EnableCursor() : DisableCursor();
+    }
 
-    player_angle -= deltamousepos.x * turn_speed * dt; //moltiplico per 0.01 per rendere il movimento più lento
+    Vector2 deltamousepos = IsCursorHidden() ? GetMouseDelta() : (Vector2){0, 0};
+
+    player_angle -= deltamousepos.x * turn_speed;
     float stepy = (IsKeyDown(KEY_W) - IsKeyDown(KEY_S)) * move_speed * dt;//dritto
     float stepx = (IsKeyDown(KEY_D) - IsKeyDown(KEY_A)) * move_speed * dt;//diagonale
 
