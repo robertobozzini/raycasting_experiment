@@ -55,12 +55,15 @@ float minimap_height = 0; //dimensione della mappa in pixel
 
 Rectangle minimap_rect; //rettangolo della minimappa
 Color minimap_color = floor_color; //colore della minimappa //colore dei muri della minimappa
-Color player_color = {0, 255, 0, 255}; //colore del giocatore sulla minimappa
+Color player_color = {0, 200, 0, 255}; //colore del giocatore sulla minimappa
 Color border_color = {0, 0, 0, 255}; //colore del bordo della minimappa
+Color view_color = {10, 150, 10, 80};
 //wall_color è il colore dei muri
 float padding = 10.0f; //padding tra la minimappa e il bordo dello schermo
 
 float border = 10.0f; //spessore del bordo della minimappa
+float fill_gaps = 0.05f;
+
 
 void minimap_init(void){
 
@@ -78,9 +81,11 @@ void minimap_init(void){
 
     minimap_rect = {(float)ScreenWidth - minimap_width - border - padding, border + padding, minimap_width, minimap_height};
 
+    fill_gaps *= minimap_cellsize;
 }
 
-float fill_gaps = 0.1f;
+
+const int minimap_rays = 60;
 
 void minimap_draw(void){
     DrawRectangle(minimap_rect.x - border, minimap_rect.y - border,
@@ -95,8 +100,23 @@ void minimap_draw(void){
             }
         }
     }
+
+    //draw player perspective
+    float px = minimap_rect.x + player_pos.x*minimap_cellsize;
+    float py = minimap_rect.y + player_pos.y*minimap_cellsize;
+
+    // for(int i=0;i<2;i++){
+    //     float a = player_angle + FOV/2.0f - FOV * (float)i;
+    //     float d = cast_ray(a) * minimap_cellsize;
+    //     DrawLine(px, py, px + cosf(a)*d, py + sinf(a)*d, ColorAlpha(view_color, 0.5f));
+    // }
+    for(int i=0;i<minimap_rays;i++){
+        float a = player_angle + FOV/2.0f - FOV * ((float)i/(float)minimap_rays);
+        float d = cast_ray(a) * minimap_cellsize;
+        DrawLine(px, py, px + cosf(a)*d, py + sinf(a)*d, view_color);
+    }
     //draw player
-    DrawCircle(minimap_rect.x + player_pos.x * minimap_cellsize, 
-        minimap_rect.y + player_pos.y * minimap_cellsize, 
-        minimap_cellsize/3.0f, player_color);
+    DrawCircle(px, py, minimap_cellsize/2.5f, player_color);
+
+    //ora da qua devo fare i raggi
 }

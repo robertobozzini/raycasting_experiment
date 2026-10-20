@@ -1,8 +1,6 @@
 
-minimappa:
-    - o a char o a colori
-    - me stesso (pallina idealmente)
-    - raggio di fov per far vedere visuale ->capire come
+deciso che fov usare e sistemo distorsioni
+metto bussolina per orientarti meglio
 
 versione no texture:
     ombre su muri
