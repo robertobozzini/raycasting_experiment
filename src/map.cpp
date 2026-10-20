@@ -39,7 +39,7 @@ void map_init(void){
         for(int j=0;j<map_width;j++){
             MP[j][i] = map_lines[i][j];
             if(map_lines[i][j] == 'P'){
-                player_pos = {j + 0.5f, map_height - 1 - i + 0.5f};//x, y, +0.5 to center the player in the cell
+                player_pos = {j + 0.5f, i + 0.5f};//x, y, +0.5 to center the player in the cell
                 MP[j][i] = '.';//replace P with empty space
             }
         }
