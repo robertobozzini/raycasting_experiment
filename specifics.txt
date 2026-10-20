@@ -1,5 +1,16 @@
+idee costanti:
+
 # = muro
 . = spazio vuoto
 P = posizione iniziale
 
+mappa non si salva come [riga][colonna] (che sarebbe y x) ma il contrario
+
 comando è g++ *.cpp -o exe $LINKRAYLIB && ./exe
+
+
+
+
+v 0.1:
+    idea fondamentale:
+
