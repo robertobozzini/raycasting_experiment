@@ -4,7 +4,8 @@ using namespace std;
 
 Vector2 player_pos;
 float player_angle; // vedila come una circonferenza 0 è a destra, pi/2 in basso, pi a sinistra, 3pi/2 in alto
-const float FOV = PI/3.0f; //campo visivo del giocatore
+const float FOV = PI/1.5f; //campo visivo del giocatore
+//REMIND: +FOV = muri meno spessi
 const float turn_speed = 3.5e-3; //velocità di rotazione del giocatore
 const float move_speed = 3.5f; //velocità di movimento del giocatore
 const float player_radius = 0.2f; //raggio del giocatore, per la collisione con i muri
@@ -36,6 +37,19 @@ void player_update(void){
     firstframe = false;
 
     player_angle -= deltamousepos.x * turn_speed;
+
+    //trasformo le coordinate in coordinate utilizzabili per la bussola
+    if(player_angle>=2.0f*PI){
+        player_angle -= 2.0f*PI;
+    }
+    else if(player_angle<0){
+        player_angle += 2.0f*PI;
+    }
+
+
+    //cout<<"player_angle: "<<player_angle<<endl;
+
+
     float stepy = (IsKeyDown(KEY_W) - IsKeyDown(KEY_S)) * move_speed * dt;//dritto
     float stepx = (IsKeyDown(KEY_D) - IsKeyDown(KEY_A)) * move_speed * dt;//diagonale
 

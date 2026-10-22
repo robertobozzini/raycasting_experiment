@@ -7,7 +7,7 @@
 #include "game_main.h"
 
 extern Color wall_color;
-
+float angle_distorsion_fix(float direction);
 float cast_ray(float angle);
 void draw_ray(float wallsize);
 #endif

@@ -111,12 +111,12 @@ void minimap_draw(void){
     //     DrawLine(px, py, px + cosf(a)*d, py + sinf(a)*d, ColorAlpha(view_color, 0.5f));
     // }
     for(int i=0;i<minimap_rays;i++){
-        float a = player_angle + FOV/2.0f - FOV * ((float)i/(float)minimap_rays);
+        //float a = player_angle + FOV/2.0f - FOV * ((float)i/(float)minimap_rays); prima di fix distorsione
+        float a = angle_distorsion_fix((float)i / (float)minimap_rays);
         float d = cast_ray(a) * minimap_cellsize;
         DrawLine(px, py, px + cosf(a)*d, py + sinf(a)*d, view_color);
     }
     //draw player
     DrawCircle(px, py, minimap_cellsize/2.5f, player_color);
 
-    //ora da qua devo fare i raggi
 }
